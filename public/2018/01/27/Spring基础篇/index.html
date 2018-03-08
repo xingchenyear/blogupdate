@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>待你如初见</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring相关资料 Spring 学习资料http://spring.io/  官网首页http://projects.spring.io/spring-framework/   aop ico文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="待你如初见">
+<meta property="og:url" content="http://win5.top/2018/01/27/Spring基础篇/index.html">
+<meta property="og:site_name" content="待你如初见">
+<meta property="og:description" content="Spring相关资料 Spring 学习资料http://spring.io/  官网首页http://projects.spring.io/spring-framework/   aop ico文档">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://vking.top/img/Spring01.png">
+<meta property="og:updated_time" content="2018-03-05T12:11:54.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="待你如初见">
+<meta name="twitter:description" content="Spring相关资料 Spring 学习资料http://spring.io/  官网首页http://projects.spring.io/spring-framework/   aop ico文档">
+<meta name="twitter:image" content="https://vking.top/img/Spring01.png">
+  
+    <link rel="alternative" href="/atom.xml" title="待你如初见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">待你如初见</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">自由，乐观，努力</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="/" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.olei.me/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">因为一无所有 所以一直负重前行</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">待你如初见</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">待你如初见</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">自由，乐观，努力</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="/" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Spring基础篇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/27/Spring基础篇/" class="article-date">
+      <time datetime="2018-01-27T02:53:31.000Z" itemprop="datePublished">2018-01-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Spring相关资料"><a href="#Spring相关资料" class="headerlink" title="Spring相关资料"></a>Spring相关资料</h2><blockquote>
+<p>Spring 学习资料<br><a href="http://spring.io/" target="_blank" rel="noopener">http://spring.io/</a>  官网首页<br><a href="http://projects.spring.io/spring-framework/" target="_blank" rel="noopener">http://projects.spring.io/spring-framework/</a>   aop ico文档</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Spring是什么"><a href="#Spring是什么" class="headerlink" title="Spring是什么"></a>Spring是什么</h2><ul>
+<li>Spring是一个开源框架，为了解决企业应用开发的复杂性而创建的，现在已经不止应用于企业应用</li>
+<li>是一个轻量级的IOC(控制反转)和AOP(面相切面编成)的容器框架</li>
+</ul>
+<blockquote>
+<ul>
+<li>从大小与开销两方面而言Spring都是轻量级的</li>
+<li>通过IOC(控制反转)的技术达到松耦合的目的</li>
+<li>提供了AOP的丰富支持，允许通过分离应用的业务逻辑与系统级服务进行内聚性开发</li>
+<li>包含并管理应用对象的配置和生命周期，这个意义上是一种容器</li>
+<li>将简单的组件配置、组合成为复杂的应用，这个意义上是框架</li>
+</ul>
+</blockquote>
+<h2 id="Framework-Runtime"><a href="#Framework-Runtime" class="headerlink" title="Framework Runtime"></a>Framework Runtime</h2><blockquote>
+<p><img src="https://vking.top/img/Spring01.png" alt=""></p>
+</blockquote>
+<h2 id="什么是IOC"><a href="#什么是IOC" class="headerlink" title="什么是IOC"></a>什么是IOC</h2><blockquote>
+<ul>
+<li>IOC:控制反转，控制权的转移，应用本身不负责以来对象的创建和维护，而是由外部容器负责创建和维护</li>
+<li>DI(依赖注入)是其一种实现方式</li>
+<li>目的：创建对象并且组装对象之间的关系</li>
+</ul>
+</blockquote>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><blockquote>
+<ul>
+<li>下载junit-*.jar并引入工程</li>
+<li>创建UnitTestBase类，完成对Spring配置文件的加载、销毁</li>
+<li>所有的单元测试类都继承自UnitTestBase，通过它的getBean方法取得想要得到的对象</li>
+<li>子类(具体执行单元测试的类)加注解:@RunWith(BlockJunit4ClassRunner.class)</li>
+<li>单元测试方法加注解:@Test</li>
+<li>右键选择要执行的单元测试方法执行或者执行一个类的全部单元测试方法</li>
+</ul>
+</blockquote>
+<h2 id="Bean容器的初始化"><a href="#Bean容器的初始化" class="headerlink" title="Bean容器的初始化"></a>Bean容器的初始化</h2><ul>
+<li><p>基础:两个包</p>
+<ul>
+<li>org.springframework.beans</li>
+<li>org.springframework.context</li>
+<li>BeanFactory提供配置结构和基本功能，加载并初始化Bean</li>
+<li>ApplicationContext保存了Bean对象并在Spring中广泛使用</li>
+</ul>
+</li>
+<li>方式：ApplicationContext<ul>
+<li>本地文件</li>
+<li>Classpath</li>
+<li>Web应用中以来servlet或Listener</li>
+</ul>
+</li>
+</ul>
+<h2 id="Spring的注入"><a href="#Spring的注入" class="headerlink" title="Spring的注入"></a>Spring的注入</h2><ul>
+<li>Spring注入指在启动Spring容器加载bean配置的时候，完成对变量的赋值行为</li>
+<li><p>常用的两种注入方式</p>
+<ul>
+<li>设值注入</li>
+<li>构造注入      <h2 id="Bean容器的初始化-1"><a href="#Bean容器的初始化-1" class="headerlink" title="Bean容器的初始化"></a>Bean容器的初始化</h2></li>
+</ul>
+</li>
+<li><p>基础:两个包</p>
+<ul>
+<li>org.springframework.beans</li>
+<li>org.springframework.context</li>
+<li>BeanFactory提供配置结构和基本功能，加载并初始化Bean</li>
+<li>ApplicationContext保存了Bean对象并在Spring中广泛使用</li>
+</ul>
+</li>
+<li>方式：ApplicationContext<ul>
+<li>本地文件</li>
+<li>Classpath</li>
+<li>Web应用中以来servlet或Listener</li>
+</ul>
+</li>
+</ul>
+<h2 id="Spring的注入-1"><a href="#Spring的注入-1" class="headerlink" title="Spring的注入"></a>Spring的注入</h2><ul>
+<li>Spring注入指在启动Spring容器加载bean配置的时候，完成对变量的赋值行为</li>
+<li>常用的两种注入方式<ul>
+<li>设值注入</li>
+<li>构造注入</li>
+</ul>
+</li>
+</ul>
+<h3 id="设置注入"><a href="#设置注入" class="headerlink" title="设置注入"></a>设置注入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">XML配置</span><br><span class="line"> &lt;bean id=<span class="string">"ispringService"</span> class=<span class="string">"com.DIDemo.service.springServiceImopl"</span>&gt;</span><br><span class="line">        &lt;property name=<span class="string">"ispringDao"</span> ref=<span class="string">"ispringDao"</span>&gt;&lt;/property&gt;</span><br><span class="line"> &lt;/bean&gt;</span><br><span class="line"> &lt;bean id=<span class="string">"ispringDao"</span> class=<span class="string">"com.DIDemo.dao.sptingDaoImpl"</span>&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="构造注入"><a href="#构造注入" class="headerlink" title="构造注入"></a>构造注入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=<span class="string">"injectionService"</span> class=<span class="string">"com.imooc.ioc.injection.service.InjectionServiceImpl"</span>&gt;</span><br><span class="line">        	&lt;constructor-arg name=<span class="string">"injectionDAO"</span> ref=<span class="string">"injectionDAO"</span>&gt;&lt;/constructor-arg&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;bean id=<span class="string">"injectionDAO"</span> class=<span class="string">"com.imooc.ioc.injection.dao.InjectionDAOImpl"</span>&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="bean的配置项"><a href="#bean的配置项" class="headerlink" title="bean的配置项"></a>bean的配置项</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">id:bean的唯一标示</span><br><span class="line">class:需要实例化的类</span><br><span class="line">scope:范围(作用域)</span><br><span class="line">constructor arguments:构造器参数</span><br><span class="line">properties:属性</span><br><span class="line">autowiring mode:自动装配模式</span><br><span class="line">lazy-initialization mode:懒加载模式</span><br><span class="line">initialization/destruction method:初始化及销毁的方法</span><br></pre></td></tr></table></figure>
+<h3 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">singleton:单例，指一个Bean容器中只存在一份（默认）</span><br><span class="line">prototype:每次请求都创建新的实例，destroy方式不生效</span><br><span class="line">request:每次http请求被创建一个实例且仅在当前request中有效</span><br><span class="line">session:同上,每次http请求被创建，当前session有效</span><br><span class="line">global session:基于portlet的web中有效（portlet定义了global session），如果在web中同session</span><br></pre></td></tr></table></figure>
+<h3 id="Bean初始化"><a href="#Bean初始化" class="headerlink" title="Bean初始化"></a>Bean初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.实现org.spppringframework.beans.factory.InitialingBean接口，覆盖afterPropertiesSet方法</span><br><span class="line">2.在配置文件中配置init-method</span><br></pre></td></tr></table></figure>
+<h3 id="Bean销毁"><a href="#Bean销毁" class="headerlink" title="Bean销毁"></a>Bean销毁</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.实现org.spppringframework.beans.factory.DisposableBean接口覆盖destroy方法</span><br><span class="line">2.在配置文件中配置destroy-method</span><br></pre></td></tr></table></figure>
+<h3 id="配置全局默认初始化销毁方法"><a href="#配置全局默认初始化销毁方法" class="headerlink" title="配置全局默认初始化销毁方法"></a>配置全局默认初始化销毁方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在Bean全局配置文件中添加default-init-metho==<span class="string">"init"</span>初始化方法</span><br><span class="line">default-destroy-method=<span class="string">"destroy"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">针对资源文件的统一接口</span><br><span class="line">UrlResource:URL对应的组员，根据一个URL地址即可构建</span><br><span class="line">ClassPathResource：获取类罗京下的资源文件</span><br><span class="line">FileSystemResource：获取文件系统里面的资源</span><br><span class="line">SercletCentextRescource：ServletContext封装的资源用于访问ServletContext环境下的资源</span><br><span class="line">InputStreamResource：针对于输入流封装的资源</span><br><span class="line">ByteArrayResource：针对字节数组封装资源</span><br></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/27/Spring基础篇/"></a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 待你如初见 的个人博客">待你如初见</a></p>
+        <p><span>发布时间:</span>2018年01月27日 - 10时53分</p>
+        <p><span>最后更新:</span>2018年03月05日 - 20时11分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/27/Spring基础篇/" title="">http://win5.top/2018/01/27/Spring基础篇/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://win5.top/2018/01/27/Spring基础篇/　　作者: 待你如初见" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/01/27/自学相关资源/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          自学相关资源
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/26/Java多线程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java多线程 </div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring相关资料"><span class="toc-number">1.</span> <span class="toc-text">Spring相关资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring是什么"><span class="toc-number">2.</span> <span class="toc-text">Spring是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Framework-Runtime"><span class="toc-number">3.</span> <span class="toc-text">Framework Runtime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是IOC"><span class="toc-number">4.</span> <span class="toc-text">什么是IOC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单元测试"><span class="toc-number">5.</span> <span class="toc-text">单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean容器的初始化"><span class="toc-number">6.</span> <span class="toc-text">Bean容器的初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的注入"><span class="toc-number">7.</span> <span class="toc-text">Spring的注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean容器的初始化-1"><span class="toc-number">8.</span> <span class="toc-text">Bean容器的初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的注入-1"><span class="toc-number">9.</span> <span class="toc-text">Spring的注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置注入"><span class="toc-number">9.1.</span> <span class="toc-text">设置注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造注入"><span class="toc-number">9.2.</span> <span class="toc-text">构造注入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bean的配置项"><span class="toc-number">10.</span> <span class="toc-text">bean的配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bean的作用域"><span class="toc-number">10.1.</span> <span class="toc-text">bean的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean初始化"><span class="toc-number">10.2.</span> <span class="toc-text">Bean初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean销毁"><span class="toc-number">10.3.</span> <span class="toc-text">Bean销毁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置全局默认初始化销毁方法"><span class="toc-number">10.4.</span> <span class="toc-text">配置全局默认初始化销毁方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resources"><span class="toc-number">10.5.</span> <span class="toc-text">Resources</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/01/27/自学相关资源/" title="上一篇: 自学相关资源">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/01/26/Java多线程/" title="下一篇: Java多线程 ">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/Java中间件/">Java中间件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/自学相关资源/">自学相关资源</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Spring基础篇/">Spring基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/Java多线程/">Java多线程 </a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/JavaSocket应用/">JavaSocket应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/21/Java反射Class类与类动态载/">Java反射Class类与类动态载</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/20/对象序列化与反序列化/">对象序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/JavaIO流输入输出流-字符流/">JavaIO流输入输出流-字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流输入输出流-字节流/">JavaIO流输入输出流-字节流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流RandomAccessFile/">JavaIO流RandomAccessFile</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/JavaIO流File类/">JavaIO流File类</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 待你如初见
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

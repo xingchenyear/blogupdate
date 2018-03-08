@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaIO流输入输出流-字节流 | 待你如初见</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IO流分为输入流、输出流输入输出流 又分为字节流、字符流 字节流 InputStream：抽象了应用程序读取数据的方式  OutputStream：抽象了应用程序写 出数据的方式 EOF = End 读到-1就读到结尾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaIO流输入输出流-字节流">
+<meta property="og:url" content="http://win5.top/2018/01/18/JavaIO流输入输出流-字节流/index.html">
+<meta property="og:site_name" content="待你如初见">
+<meta property="og:description" content="IO流分为输入流、输出流输入输出流 又分为字节流、字符流 字节流 InputStream：抽象了应用程序读取数据的方式  OutputStream：抽象了应用程序写 出数据的方式 EOF = End 读到-1就读到结尾">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-19T09:49:03.837Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaIO流输入输出流-字节流">
+<meta name="twitter:description" content="IO流分为输入流、输出流输入输出流 又分为字节流、字符流 字节流 InputStream：抽象了应用程序读取数据的方式  OutputStream：抽象了应用程序写 出数据的方式 EOF = End 读到-1就读到结尾">
+  
+    <link rel="alternative" href="/atom.xml" title="待你如初见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">待你如初见</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">自由，乐观，努力</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="/" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.olei.me/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">因为一无所有 所以一直负重前行</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">待你如初见</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">待你如初见</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">自由，乐观，努力</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="/" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-JavaIO流输入输出流-字节流" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/18/JavaIO流输入输出流-字节流/" class="article-date">
+      <time datetime="2018-01-18T09:14:16.000Z" itemprop="datePublished">2018-01-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaIO流输入输出流-字节流
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="IO流分为输入流、输出流"><a href="#IO流分为输入流、输出流" class="headerlink" title="IO流分为输入流、输出流"></a>IO流分为输入流、输出流</h3><p>输入输出流 又分为字节流、字符流</p>
+<h3 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h3><ol>
+<li>InputStream：抽象了应用程序读取数据的方式 </li>
+<li>OutputStream：抽象了应用程序写 出数据的方式</li>
+<li>EOF = End 读到-1就读到结尾</li>
+</ol>
+<a id="more"></a>
+<h3 id="输入流基本方法"><a href="#输入流基本方法" class="headerlink" title="输入流基本方法"></a>输入流基本方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ int b = in.read();读取一个字节无符号填充到int低八位.-1是EOF</span><br><span class="line">$ in.read(byte[] buf) 读取数据填充到字节数组buf</span><br><span class="line">$ in.read(byte[] buf,int start, int size)读取数据到字节数组buf从buf的start位置开始存放size长度分数据</span><br></pre></td></tr></table></figure>
+<h3 id="输出流的基本方法"><a href="#输出流的基本方法" class="headerlink" title="输出流的基本方法"></a>输出流的基本方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ out.write(int b) //写出一个byte到流，b的低8位</span><br><span class="line">$ out.write(byte[] buf) //将buf字节数组都写到流</span><br><span class="line">$ out.write(byte[] buf, int start,int size) //字节数组buf从start位置开始写size长度的字节到流</span><br></pre></td></tr></table></figure>
+<h2 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><h3 id="具体实现了在文件上读取数据"><a href="#具体实现了在文件上读取数据" class="headerlink" title="具体实现了在文件上读取数据"></a>具体实现了在文件上读取数据</h3><h2 id="FileInputStream-1"><a href="#FileInputStream-1" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><h3 id="实现了向文件写出byte数据方法"><a href="#实现了向文件写出byte数据方法" class="headerlink" title="实现了向文件写出byte数据方法"></a>实现了向文件写出byte数据方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ public static void printHex(String fileName) throws IOException &#123;</span><br><span class="line">$         //把文件转化为字节流十六进制进行读操作</span><br><span class="line">$         FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">$         int b;</span><br><span class="line">$         int i = 1;</span><br><span class="line">$         <span class="keyword">while</span> ((b=fis.read()) != -1)&#123;</span><br><span class="line">$             <span class="keyword">if</span>(b &lt;= 0xf )&#123;System.out.print(<span class="string">"0"</span>);&#125;</span><br><span class="line">$             System.out.print(Integer.toHexString(b)+<span class="string">" "</span>);</span><br><span class="line">$             <span class="keyword">if</span> (i%10==0)&#123;</span><br><span class="line">$                 System.out.println();</span><br><span class="line">$             &#125;</span><br><span class="line">$             i++;</span><br><span class="line">$         &#125;</span><br><span class="line">$         fis.close();</span><br><span class="line">$     &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用字节数组读取文件"><a href="#使用字节数组读取文件" class="headerlink" title="使用字节数组读取文件"></a>使用字节数组读取文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$  //不确定文件大小（推荐）</span><br><span class="line">$  FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">$        byte[] bytes = new byte[1024];</span><br><span class="line">$        int num;</span><br><span class="line">$        <span class="keyword">while</span> ((num=fis.read(bytes,0,bytes.length))!=-1)&#123;</span><br><span class="line">$            <span class="keyword">for</span> (int i = 0; i &lt; num ; i++) &#123;</span><br><span class="line">$                //&amp; 0xff byte为8位,int为32位为避免数据转换出错将高24位去除</span><br><span class="line">$                System.out.print(Integer.toHexString(bytes[i] &amp; 0xff)+<span class="string">" "</span>);</span><br><span class="line">$            &#125;</span><br><span class="line">$        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">$        byte[] bytes = new byte[1024];</span><br><span class="line">$        int b;</span><br><span class="line">$        int i=1;</span><br><span class="line">$        <span class="keyword">if</span> ((b=fis.read(bytes,0,bytes.length))!=-1)&#123;</span><br><span class="line">$            <span class="keyword">for</span> (int j = 0; j &lt; b; j++) &#123;</span><br><span class="line">$                System.out.print(Integer.toHexString(bytes[i] &amp; 0xff)+ <span class="string">" "</span>);</span><br><span class="line">$                <span class="keyword">if</span> (i%10==0)</span><br><span class="line">$                    System.out.println();</span><br><span class="line">$                i++;</span><br><span class="line">$            &#125;</span><br><span class="line">$        &#125;</span><br><span class="line">$        fis.close();</span><br></pre></td></tr></table></figure>
+<h2 id="FileOutPutStream"><a href="#FileOutPutStream" class="headerlink" title="FileOutPutStream"></a>FileOutPutStream</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ FileOutputStream fos = new FileOutputStream(fileName);</span><br><span class="line">$        fos.write(<span class="string">'A'</span>);</span><br><span class="line">$        fos.write(<span class="string">'B'</span>);</span><br><span class="line">$        int a =10;</span><br><span class="line">$        fos.write(a&gt;&gt;&gt;24);</span><br><span class="line">$        fos.write(a&gt;&gt;&gt;16);</span><br><span class="line">$        fos.write(a&gt;&gt;&gt;8);</span><br><span class="line">$        fos.write(a);</span><br><span class="line">$        byte[] utf8 = <span class="string">"中国"</span>.getBytes(<span class="string">"utf-8"</span>);</span><br><span class="line">$        fos.write(utf8);</span><br><span class="line">$        fos.close();</span><br></pre></td></tr></table></figure>
+<h2 id="文件复制操作"><a href="#文件复制操作" class="headerlink" title="文件复制操作"></a>文件复制操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$   public static void copyFile(File srcFile,File destFile)throws IOException&#123;</span><br><span class="line">$        <span class="keyword">if</span>(!srcFile.exists())&#123;</span><br><span class="line">$            new IllegalArgumentException(<span class="string">"文件/文件夹不存在"</span>);</span><br><span class="line">$        &#125;</span><br><span class="line">$        <span class="keyword">if</span> (srcFile.isFile())&#123;</span><br><span class="line">$            new IllegalArgumentException(<span class="string">"目标不是一个文件"</span>);</span><br><span class="line">$        &#125;</span><br><span class="line">$        FileInputStream fis = new FileInputStream(srcFile);</span><br><span class="line">$        FileOutputStream fos = new FileOutputStream(destFile);</span><br><span class="line">$        byte[] bytes = new byte[1024];</span><br><span class="line">$        int num ;</span><br><span class="line">$        <span class="keyword">while</span> ((num=fis.read(bytes,0,bytes.length)) != -1)&#123;</span><br><span class="line">$                fos.write(bytes,0,num);</span><br><span class="line">$                fos.flush();</span><br><span class="line">$        &#125;</span><br><span class="line">$</span><br><span class="line">$       fis.close();</span><br><span class="line">$        fos.close();</span><br><span class="line">$   	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="DataInputStream-DataOutPutStream"><a href="#DataInputStream-DataOutPutStream" class="headerlink" title="DataInputStream/DataOutPutStream"></a>DataInputStream/DataOutPutStream</h2><h3 id="是对“流”的扩展-可以更加方便读取int-long-String等类型数据"><a href="#是对“流”的扩展-可以更加方便读取int-long-String等类型数据" class="headerlink" title="是对“流”的扩展,可以更加方便读取int,long,String等类型数据"></a>是对“流”的扩展,可以更加方便读取int,long,String等类型数据</h3><h2 id="DataInputStream"><a href="#DataInputStream" class="headerlink" title="DataInputStream"></a>DataInputStream</h2><h3 id="writeInt-writeDouble-writeUTF"><a href="#writeInt-writeDouble-writeUTF" class="headerlink" title="writeInt()/writeDouble()/writeUTF()"></a>writeInt()/writeDouble()/writeUTF()</h3><h2 id="BufferedInputStream-BufferedOutputStream"><a href="#BufferedInputStream-BufferedOutputStream" class="headerlink" title="BufferedInputStream/BufferedOutputStream"></a>BufferedInputStream/BufferedOutputStream</h2><p>这两个流类位IO提供了带缓冲区的操作，一般打开文件进行写入或读取是，都会加上缓冲，这种流模式提高了IO的性能从应用程序中把输入放入文件，相当于将一缸水倒入另一缸水</p>
+<h3 id="FileOutputStream、DataoutputStream与BufferedOutputStream"><a href="#FileOutputStream、DataoutputStream与BufferedOutputStream" class="headerlink" title="FileOutputStream、DataoutputStream与BufferedOutputStream:"></a>FileOutputStream、DataoutputStream与BufferedOutputStream:</h3><ol>
+<li>FileOutputStream—&gt;write()方法相当于一滴一滴地把水“转移”过去</li>
+<li>DataOutputStream–&gt;writeXxx()方法会方便一些，相当于一瓢一瓢（比如int 4滴4滴转移）把水“转移”过去</li>
+<li>BufferedOutputStream—&gt;write方法更方便，相当于一飘一瓢先放入桶中(缓冲区)，再从桶中倒入到另一个缸中</li>
+<li>读写效率对比：使用字节数组作为缓冲的流 &gt; 使用原生缓冲的流 &gt; 不使用缓冲的流<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//计算时延</span><br><span class="line">long start=System.currentTimeMillis();</span><br><span class="line">long end=System.currentTimeMillis();</span><br><span class="line">System.out.println(end-start);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用缓冲字节流复制确实是最快的方式，但对于小文件10M以下的文件体现不出优势，对于百兆文件正确使用，时间可以控制到50ms内</span><br><span class="line">复制文件最快的做法是将批量读取到的字节数组使用缓冲写入到文件，在机器性能范围内字节数组越大越快。</span><br><span class="line">在循环写入的过程中不需要使用flush，缓冲输入流在关闭的时候会将所有缓冲区的数据全部写入文件，</span><br><span class="line">使用flush刷新缓冲就失去了缓冲的意义。最后关闭IO流和文件流应该在finally中关闭，</span><br><span class="line">否则IO异常时执行不到close语句，IO流仍然没有关闭。</span><br></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/18/JavaIO流输入输出流-字节流/">JavaIO流输入输出流-字节流</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 待你如初见 的个人博客">待你如初见</a></p>
+        <p><span>发布时间:</span>2018年01月18日 - 17时14分</p>
+        <p><span>最后更新:</span>2018年01月19日 - 17时49分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/18/JavaIO流输入输出流-字节流/" title="JavaIO流输入输出流-字节流">http://win5.top/2018/01/18/JavaIO流输入输出流-字节流/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://win5.top/2018/01/18/JavaIO流输入输出流-字节流/　　作者: 待你如初见" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/01/19/JavaIO流输入输出流-字符流/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          JavaIO流输入输出流-字符流
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/18/JavaIO流RandomAccessFile/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaIO流RandomAccessFile</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IO流分为输入流、输出流"><span class="toc-number">1.</span> <span class="toc-text">IO流分为输入流、输出流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字节流"><span class="toc-number">2.</span> <span class="toc-text">字节流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入流基本方法"><span class="toc-number">3.</span> <span class="toc-text">输入流基本方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出流的基本方法"><span class="toc-number">4.</span> <span class="toc-text">输出流的基本方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileInputStream"><span class="toc-number"></span> <span class="toc-text">FileInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现了在文件上读取数据"><span class="toc-number">1.</span> <span class="toc-text">具体实现了在文件上读取数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileInputStream-1"><span class="toc-number"></span> <span class="toc-text">FileInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现了向文件写出byte数据方法"><span class="toc-number">1.</span> <span class="toc-text">实现了向文件写出byte数据方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用字节数组读取文件"><span class="toc-number"></span> <span class="toc-text">使用字节数组读取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileOutPutStream"><span class="toc-number"></span> <span class="toc-text">FileOutPutStream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件复制操作"><span class="toc-number"></span> <span class="toc-text">文件复制操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DataInputStream-DataOutPutStream"><span class="toc-number"></span> <span class="toc-text">DataInputStream/DataOutPutStream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#是对“流”的扩展-可以更加方便读取int-long-String等类型数据"><span class="toc-number">1.</span> <span class="toc-text">是对“流”的扩展,可以更加方便读取int,long,String等类型数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DataInputStream"><span class="toc-number"></span> <span class="toc-text">DataInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#writeInt-writeDouble-writeUTF"><span class="toc-number">1.</span> <span class="toc-text">writeInt()/writeDouble()/writeUTF()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BufferedInputStream-BufferedOutputStream"><span class="toc-number"></span> <span class="toc-text">BufferedInputStream/BufferedOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream、DataoutputStream与BufferedOutputStream"><span class="toc-number">1.</span> <span class="toc-text">FileOutputStream、DataoutputStream与BufferedOutputStream:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后记"><span class="toc-number">2.</span> <span class="toc-text">后记</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/01/19/JavaIO流输入输出流-字符流/" title="上一篇: JavaIO流输入输出流-字符流">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/01/18/JavaIO流RandomAccessFile/" title="下一篇: JavaIO流RandomAccessFile">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/Java中间件/">Java中间件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/自学相关资源/">自学相关资源</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Spring基础篇/">Spring基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/Java多线程/">Java多线程 </a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/JavaSocket应用/">JavaSocket应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/21/Java反射Class类与类动态载/">Java反射Class类与类动态载</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/20/对象序列化与反序列化/">对象序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/JavaIO流输入输出流-字符流/">JavaIO流输入输出流-字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流输入输出流-字节流/">JavaIO流输入输出流-字节流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流RandomAccessFile/">JavaIO流RandomAccessFile</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/JavaIO流File类/">JavaIO流File类</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 待你如初见
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

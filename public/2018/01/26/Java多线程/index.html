@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java多线程  | 待你如初见</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java多线程基础概念 程序是指令、数据及其组织形式的描述，进程是程序的实体。进程：程序（任务）的执行过程，具有动态性；持有资源（共享内存，共享文件）和线程，是系统进行资源分配和调度的基本单位。线程：有时被称为轻量级进程，是程序执行流的最小单元，线程共享进程的所有资源进程和线程的关系：一对多，同一进程可以拥有多个线程线程之间的关系（交互）：互斥、同步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程 ">
+<meta property="og:url" content="http://win5.top/2018/01/26/Java多线程/index.html">
+<meta property="og:site_name" content="待你如初见">
+<meta property="og:description" content="Java多线程基础概念 程序是指令、数据及其组织形式的描述，进程是程序的实体。进程：程序（任务）的执行过程，具有动态性；持有资源（共享内存，共享文件）和线程，是系统进行资源分配和调度的基本单位。线程：有时被称为轻量级进程，是程序执行流的最小单元，线程共享进程的所有资源进程和线程的关系：一对多，同一进程可以拥有多个线程线程之间的关系（交互）：互斥、同步">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://vking.top/img/Thread01.jpg">
+<meta property="og:updated_time" content="2018-01-26T09:43:48.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java多线程 ">
+<meta name="twitter:description" content="Java多线程基础概念 程序是指令、数据及其组织形式的描述，进程是程序的实体。进程：程序（任务）的执行过程，具有动态性；持有资源（共享内存，共享文件）和线程，是系统进行资源分配和调度的基本单位。线程：有时被称为轻量级进程，是程序执行流的最小单元，线程共享进程的所有资源进程和线程的关系：一对多，同一进程可以拥有多个线程线程之间的关系（交互）：互斥、同步">
+<meta name="twitter:image" content="https://vking.top/img/Thread01.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="待你如初见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">待你如初见</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">自由，乐观，努力</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="/" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.olei.me/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">因为一无所有 所以一直负重前行</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">待你如初见</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">待你如初见</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">自由，乐观，努力</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="/" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Java多线程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/26/Java多线程/" class="article-date">
+      <time datetime="2018-01-26T03:46:46.000Z" itemprop="datePublished">2018-01-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java多线程 
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Java多线程基础概念"><a href="#Java多线程基础概念" class="headerlink" title="Java多线程基础概念"></a>Java多线程基础概念</h2><blockquote>
+<p>程序是指令、数据及其组织形式的描述，进程是程序的实体。<br>进程：程序（任务）的执行过程，具有动态性；持有资源（共享内存，共享文件）和线程，是系统进行资源分配和调度的基本单位。<br>线程：有时被称为轻量级进程，是程序执行流的最小单元，线程共享进程的所有资源<br>进程和线程的关系：一对多，同一进程可以拥有多个线程<br>线程之间的关系（交互）：互斥、同步</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="线程的实现方法"><a href="#线程的实现方法" class="headerlink" title="线程的实现方法"></a>线程的实现方法</h2><blockquote>
+<p>1、继承java.lang包下的Thread类，覆写Thread的run()方法<br>2、实现java.lang.Runnable接口，同样在run()方法中实现运行在线程上的代码</p>
+</blockquote>
+<p><img src="https://vking.top/img/Thread01.jpg" alt=""></p>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><blockquote>
+<p>volatile保证了线程能够正确的读取其他线程写入的值,解决了可见性的问题</p>
+</blockquote>
+<h3 id="多线程目的"><a href="#多线程目的" class="headerlink" title="多线程目的"></a>多线程目的</h3><blockquote>
+<p>多线程编程的目的，就是”最大限度地利用CPU资源”,当某一线程的处理不需要占用CPU而只和I/O,OEMBIOS等资源打交道时，让需要占用CPU资源的其它线程有机会获得CPU资源。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 线程1</span><br><span class="line"> */</span><br><span class="line">public class ArmyRunnable implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">    //volatile 保证了可以正确读取其他线程写入的值</span><br><span class="line">    //因为可见性的问题可能无法正确读到值可见性 jef JMM</span><br><span class="line">    volatile boolean keepRunning = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void <span class="function"><span class="title">run</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (keepRunning)&#123;</span><br><span class="line">            <span class="keyword">for</span> (int i = 0; i &lt; 5 ; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">"当前执行["</span>+i+<span class="string">"]"</span>);</span><br><span class="line">                //让出处理器时间，下次调用不一定会调用哪个</span><br><span class="line"></span><br><span class="line">                Thread.yield();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"执行结束"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 第二个线程</span><br><span class="line"> */</span><br><span class="line">public class PersonThread extends Thread&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void <span class="function"><span class="title">run</span></span>() &#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"03线程开始了"</span>);</span><br><span class="line">        <span class="keyword">for</span> (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">"03线程正在执行"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"03线程结束了"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * RUNING</span><br><span class="line"> */</span><br><span class="line">public class Stage extends Thread&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void <span class="function"><span class="title">run</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Ready Go!!!"</span>);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(3000);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ArmyRunnable armyRunnable1 = new ArmyRunnable();</span><br><span class="line">        ArmyRunnable armyRunnable2 = new ArmyRunnable();</span><br><span class="line"></span><br><span class="line">        Thread thread1 = new Thread(armyRunnable1,<span class="string">"线程一"</span>);</span><br><span class="line">        Thread thread2 = new Thread(armyRunnable2,<span class="string">"线程2"</span>);</span><br><span class="line"></span><br><span class="line">        //启动线程</span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        //当前本线程休眠</span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(50);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //线程03开始执行</span><br><span class="line">        System.out.println(<span class="string">"03线程开始执行"</span>);</span><br><span class="line"></span><br><span class="line">        Thread sanCheng = new PersonThread();</span><br><span class="line">        sanCheng.setName(<span class="string">"03线程"</span>);</span><br><span class="line">        System.out.println(<span class="string">"03线程运行中"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        armyRunnable1.keepRunning = <span class="literal">false</span>;</span><br><span class="line">        armyRunnable2.keepRunning = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            thread2.sleep(2000);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sanCheng.start();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            sanCheng.join();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"运行结束"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Stage().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关于线程停止"><a href="#关于线程停止" class="headerlink" title="关于线程停止"></a>关于线程停止</h2><blockquote>
+<p>interrupt()方法不会中断一个正在运行的线程。这一方法实际上完成的是，在线程受到阻塞时抛出一个中断信号，这样线程就得以退出阻塞的状态。更确切的说，如果线程被Object.wait, Thread.join和Thread.sleep三种方法之一阻塞，那么，它将接收到一个中断异常（InterruptedException），从而提早地终结被阻塞状态，然后该线程还是继续运行的<br>@Java线程——如何正确停止线程<br>一、错误一：stop()方法<br>1、not stop：stop()方法会使线程戛然而止<br>2、使程序突然中止，无法完成完整的业务步骤，也无法进行清理工作<br>二、错误二：interrupt()方法<br>1、interrupt()方法只能设置interrupt标志位（且在线程阻塞情况下，标志位会被清除，更无法设置中断标志位），无法停止线程<br>三、正确方法：设置退出标志<br>1、使用退出标志位来停止while循环<br>2、完成最后一次业务后跳出while循环后，之后进行一些清理工作</p>
+</blockquote>
+<h3 id="本人阵亡-线程是啥-啥是线程-我不知道wait-synchronize-notify-notifyAll-我失忆了"><a href="#本人阵亡-线程是啥-啥是线程-我不知道wait-synchronize-notify-notifyAll-我失忆了" class="headerlink" title="本人阵亡 线程是啥 啥是线程 我不知道wait synchronize notify notifyAll 我失忆了"></a>本人阵亡 线程是啥 啥是线程 我不知道wait synchronize notify notifyAll 我失忆了</h3><h3 id="wait-set-Critical-Section-都不知道"><a href="#wait-set-Critical-Section-都不知道" class="headerlink" title="wait set  Critical Section 都不知道"></a>wait set  Critical Section 都不知道</h3>
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/26/Java多线程/">Java多线程 </a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 待你如初见 的个人博客">待你如初见</a></p>
+        <p><span>发布时间:</span>2018年01月26日 - 11时46分</p>
+        <p><span>最后更新:</span>2018年01月26日 - 17时43分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/26/Java多线程/" title="Java多线程 ">http://win5.top/2018/01/26/Java多线程/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://win5.top/2018/01/26/Java多线程/　　作者: 待你如初见" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/01/27/Spring基础篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/23/JavaSocket应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaSocket应用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java多线程基础概念"><span class="toc-number">1.</span> <span class="toc-text">Java多线程基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的实现方法"><span class="toc-number">2.</span> <span class="toc-text">线程的实现方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-number">2.1.</span> <span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程目的"><span class="toc-number">2.2.</span> <span class="toc-text">多线程目的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于线程停止"><span class="toc-number">3.</span> <span class="toc-text">关于线程停止</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本人阵亡-线程是啥-啥是线程-我不知道wait-synchronize-notify-notifyAll-我失忆了"><span class="toc-number">3.1.</span> <span class="toc-text">本人阵亡 线程是啥 啥是线程 我不知道wait synchronize notify notifyAll 我失忆了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wait-set-Critical-Section-都不知道"><span class="toc-number">3.2.</span> <span class="toc-text">wait set  Critical Section 都不知道</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/01/27/Spring基础篇/" title="上一篇: ">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/01/23/JavaSocket应用/" title="下一篇: JavaSocket应用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/Java中间件/">Java中间件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/自学相关资源/">自学相关资源</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Spring基础篇/">Spring基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/Java多线程/">Java多线程 </a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/JavaSocket应用/">JavaSocket应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/21/Java反射Class类与类动态载/">Java反射Class类与类动态载</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/20/对象序列化与反序列化/">对象序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/JavaIO流输入输出流-字符流/">JavaIO流输入输出流-字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流输入输出流-字节流/">JavaIO流输入输出流-字节流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流RandomAccessFile/">JavaIO流RandomAccessFile</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/JavaIO流File类/">JavaIO流File类</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 待你如初见
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

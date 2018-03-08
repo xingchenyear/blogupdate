@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java反射Class类与类动态载 | 待你如初见</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Class类，类类型的概念12在面向对象的世界中，万事万物皆对象。Java语言中，静态的成员，类是对象，类是Java.lang.class的实例对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java反射Class类与类动态载">
+<meta property="og:url" content="http://win5.top/2018/01/21/Java反射Class类与类动态载/index.html">
+<meta property="og:site_name" content="待你如初见">
+<meta property="og:description" content="Class类，类类型的概念12在面向对象的世界中，万事万物皆对象。Java语言中，静态的成员，类是对象，类是Java.lang.class的实例对象">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-22T07:58:43.437Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java反射Class类与类动态载">
+<meta name="twitter:description" content="Class类，类类型的概念12在面向对象的世界中，万事万物皆对象。Java语言中，静态的成员，类是对象，类是Java.lang.class的实例对象">
+  
+    <link rel="alternative" href="/atom.xml" title="待你如初见" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">待你如初见</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">自由，乐观，努力</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="/" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.olei.me/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">因为一无所有 所以一直负重前行</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">待你如初见</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">待你如初见</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">自由，乐观，努力</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="http://github.com/xingchenyear">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="/" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/xingchenyear" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Java反射Class类与类动态载" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/21/Java反射Class类与类动态载/" class="article-date">
+      <time datetime="2018-01-21T13:28:49.000Z" itemprop="datePublished">2018-01-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java反射Class类与类动态载
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Class类，类类型的概念"><a href="#Class类，类类型的概念" class="headerlink" title="Class类，类类型的概念"></a>Class类，类类型的概念</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在面向对象的世界中，万事万物皆对象。Java语言中，静态的成员，</span><br><span class="line">类是对象，类是Java.lang.class的实例对象</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="如何表示"><a href="#如何表示" class="headerlink" title="如何表示"></a>如何表示</h3><p>三种表示方式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> //1.实例在告诉我们任何一个类都有一个隐含的静态成员变量class</span><br><span class="line">Class c1 = new Foo();</span><br><span class="line"> //2.已知该类的对象通过getClass方法</span><br><span class="line">Class c2 = Foo.getClass();</span><br><span class="line"> //官方 c1，c2表示了Foo类的类类型（Class Type）</span><br><span class="line"> //万事万物皆对象，类也是对象，是Class的对象 这个对象我们称为类类型</span><br><span class="line"> // 个人理解类类型意思是 类的类型 </span><br><span class="line"> //c1 or c2 都是Foo的类类型 但一个类只可能是Class类的一个实例对象</span><br><span class="line">System.out.print(c1==c2)</span><br><span class="line"> //3.通过类名字实例化</span><br><span class="line">Class c3 = Class.forName(<span class="string">"com.xc.Foo"</span>);//填全称 会有异常</span><br><span class="line"> //通常可以通过类类型创建该类的实例对象</span><br><span class="line">Foo f1 = (Foo)c1.newInstance //需要做强制类型转换 需要有无参构造方法 会有异常</span><br></pre></td></tr></table></figure></p>
+<h2 id="Class动态加载类的方法"><a href="#Class动态加载类的方法" class="headerlink" title="Class动态加载类的方法"></a>Class动态加载类的方法</h2><blockquote>
+<p>通过Class.forName(“类的全称”)</p>
+<h2 id="类的加载方式（2种）"><a href="#类的加载方式（2种）" class="headerlink" title="类的加载方式（2种）"></a>类的加载方式（2种）</h2><h3 id="1、静态加载类"><a href="#1、静态加载类" class="headerlink" title="1、静态加载类"></a>1、静态加载类</h3><p>编译时，加载的类是静态加载类。<br>Foo foo = new Foo();<br>创建对象是静态加载类，编译时就要加载所有要用到的类，如果其中 1 个类有问题，就无法通过编译。解决该问题，可以使用动态加载类。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class office</span><br><span class="line">&#123;</span><br><span class="line">    pubic static void main(String[] args)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"wrod"</span>.equals(args[0]))&#123;</span><br><span class="line">            Word word = new Word();</span><br><span class="line">            word.start();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"Excel"</span>.equals(args[0]))&#123;</span><br><span class="line">            Excel excel = new Excel();</span><br><span class="line">            excel.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class word </span><br><span class="line">&#123;</span><br><span class="line">    public void <span class="function"><span class="title">start</span></span>()&#123;</span><br><span class="line">        System.out.print(<span class="string">"word..start.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="2、动态加载类"><a href="#2、动态加载类" class="headerlink" title="2、动态加载类"></a>2、动态加载类</h3><blockquote>
+<p>运行时，加载的类是动态加载类<br>Class.forName(“com.reflect.Foo”);<br>编译时不检查用到的类是否存在，运行时再检查。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class officeBetter</span><br><span class="line">&#123;</span><br><span class="line">    pubic static void main(String[] args)&#123;</span><br><span class="line">       try&#123;</span><br><span class="line">        //动态加载</span><br><span class="line">        Class c = Class.forNname(args[0]);</span><br><span class="line">        office o = (office)c.newInstance();</span><br><span class="line">       &#125;catch(Expction e)&#123;  </span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">interface office</span><br><span class="line">&#123;</span><br><span class="line">    void start();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class word implements office</span><br><span class="line">&#123;</span><br><span class="line">    public void <span class="function"><span class="title">start</span></span>()&#123;</span><br><span class="line">        System.out.print(<span class="string">"word..start.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="获取方法信息"><a href="#获取方法信息" class="headerlink" title="获取方法信息"></a>获取方法信息</h2><blockquote>
+<p>基本数据类型，void关键字都存在类类型<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class.getMethods()方法获取是该类的所有public方法，包括从父类继承的方法；</span><br><span class="line">class.getDeclareMethods()方法获取该类自行声明的所有方法，不论访问权限；</span><br><span class="line">method.getName()获取方法名</span><br><span class="line">method.getReturnType()获取方法的返回值</span><br><span class="line">method.getParameterTypes()，获取方法的参数类型的类类型数组class[]</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="获取方法信息："><a href="#获取方法信息：" class="headerlink" title="获取方法信息："></a>获取方法信息：</h3><blockquote>
+<p>基本的数据类型，void关键字等都存在类类型</p>
+</blockquote>
+<p>Class c = 基类.class （int,String,double,void等）</p>
+<blockquote>
+<p>Class类的基本API操作的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">c.getName()可以获取类的名称</span><br><span class="line">c.getSimpleName();//不包含包名的类的名称</span><br><span class="line">c.getMethods()获取类的【public方法】集合，【包括继承来的】</span><br><span class="line">*****</span><br><span class="line">注意【所有方法都是Method类的对象】</span><br><span class="line">c.getDeclaredMethods()获取的是所有该类【自己声明】的方法，【不问访问权限】</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="Method类提供了一些操作方法的方法"><a href="#Method类提供了一些操作方法的方法" class="headerlink" title="Method类提供了一些操作方法的方法"></a>Method类提供了一些操作方法的方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. getReturnType()得到该方法的返回值类型的类类型（class），如int.class String.class</span><br><span class="line">2. getName()得到方法的名称</span><br><span class="line">3. getParameterTypes()获得参数列表类型的类类型，如参数为(int,int)则得到</span><br><span class="line">Class c1 = int.class; int的类类型</span><br><span class="line">Class c2 = String.class; String类的类类型 String类字节码</span><br><span class="line">Class c3 = double.class; double这个数据类类型的字节码表示方式</span><br><span class="line">Class c4 = Double.class; Double这个类的类类型字节码表示方式</span><br><span class="line">Class c5 = void.class; 表达了void这个类的类类型</span><br><span class="line">getName为这个类的类类型的具体名称 </span><br><span class="line">c1.getName ---&gt; int</span><br><span class="line">c2.getName ---&gt; java.lang.String 类的全称</span><br><span class="line">c2.getSimpleName ---&gt; String 不包含包名的类的名称</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public void printClassMessage(String obj)&#123;</span><br><span class="line">         //获取类的类类型</span><br><span class="line">        Class c = obj.getClass();</span><br><span class="line">         //获取类的名称</span><br><span class="line">        String className = c.getName();</span><br><span class="line">        System.out.println(<span class="string">"obj = ["</span> + className + <span class="string">"]"</span>);</span><br><span class="line">         //获取类的方法</span><br><span class="line">         /**</span><br><span class="line">          * Method类，是方法对象</span><br><span class="line">          * 一个成员方法就是一个Method对象</span><br><span class="line">          * getMethods()方法获取的是所有public的函数，</span><br><span class="line">          * 包括从父类继承而来的</span><br><span class="line">          *getDeclaredMethods()方法是获取该类所有自己声明的方法，不论访问权限</span><br><span class="line">          */</span><br><span class="line">        Method[] methods1 = c.getMethods();</span><br><span class="line">        <span class="keyword">for</span> (int i = 0; i &lt;methods1.length ; i++) &#123;</span><br><span class="line">             //得到方法返回值类型</span><br><span class="line">            Class returnType = methods1[i].getReturnType();</span><br><span class="line">            System.out.println(<span class="string">"返回值 = ["</span> + returnType.getName() + <span class="string">"]"</span>);</span><br><span class="line">             //得到方法名称</span><br><span class="line">            System.out.println(<span class="string">"方法名 = ["</span> + methods1[i].getName() + <span class="string">"]"</span>);</span><br><span class="line">             //获取参数类型</span><br><span class="line">            Class[] paramType = methods1[i].getParameterTypes();</span><br><span class="line">            <span class="keyword">for</span> (Class class1:paramType) &#123;</span><br><span class="line">                System.out.println(<span class="string">"参数类型 = ["</span> + class1.getName() + <span class="string">"]"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="成员变量的类类型"><a href="#成员变量的类类型" class="headerlink" title="成员变量的类类型"></a>成员变量的类类型</h2><blockquote>
+<ul>
+<li>成员变量也是对象</li>
+<li>java.lang.reflect.field</li>
+<li>Field类封装了关于成员变量的操作</li>
+<li>getFields()方法获取的是所有public的成员变量的信息</li>
+<li>getDeclaredFields获取的是该类自己声明的成员变量的信息</li>
+<li>@param obj<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public void printBian(String obj)&#123;</span><br><span class="line">    Class cl = obj.getClass();</span><br><span class="line">    Field[] fs = cl.getDeclaredFields();</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt;fs.length ; i++)&#123;</span><br><span class="line">        //得到成员变量的类型的类类型</span><br><span class="line">         Class fieldType = fs[i].getType();</span><br><span class="line">        String typeName = fieldType.getName();</span><br><span class="line">        System.out.print(typeName +<span class="string">" "</span>);</span><br><span class="line">        //得到成员变量的名称</span><br><span class="line">        String fieldName = fs[i].getName();</span><br><span class="line">        System.out.println(fieldName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h2 id="构造函数的类类型"><a href="#构造函数的类类型" class="headerlink" title="构造函数的类类型"></a>构造函数的类类型</h2><blockquote>
+<ul>
+<li>构造函数是对象，java.long.Constructor 封装了构造函数的信息方法</li>
+<li>getConstructors() 获取所有public的构造方法</li>
+<li>@param obj</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public void printConstructor(String obj)&#123;</span><br><span class="line">    Class c = obj.getClass();</span><br><span class="line">    Constructor[] cs = c.getDeclaredConstructors();</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt;cs.length ; i++) &#123;</span><br><span class="line">        System.out.print(cs[i].getName()+<span class="string">" ("</span>);</span><br><span class="line">        Class[] classes = cs[i].getParameterTypes();</span><br><span class="line">        <span class="keyword">for</span> (Class classtype:classes) &#123;</span><br><span class="line">            System.out.print(classtype.getName()+<span class="string">","</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">")"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="方法的反射"><a href="#方法的反射" class="headerlink" title="方法的反射"></a>方法的反射</h2><h3 id="如何获取某个方法与方法的反射"><a href="#如何获取某个方法与方法的反射" class="headerlink" title="如何获取某个方法与方法的反射"></a>如何获取某个方法与方法的反射</h3><blockquote>
+<ol>
+<li>方法的名称和方法的参数列表才能唯一确定一个方法</li>
+<li>通过getmethod（方法名，参数…)<br> getMethod获取的是public的方法<br> getDelcaredMethod自己声明的方法</li>
+<li>通过invoke（对象名，参数…）进行反射操作</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        A a1 = new A();</span><br><span class="line">        //获取a1的类类型</span><br><span class="line">        Class c = a1.getClass();</span><br><span class="line">        //获取类类型的方法</span><br><span class="line">        try &#123;</span><br><span class="line">                //method 是获取名为<span class="built_in">print</span> 参数为int，int的方法</span><br><span class="line">                //getMethod获取的是public的方法</span><br><span class="line">                //getDelcaredMethod自己声明的方法</span><br><span class="line">            //Method m = c.getMethod(<span class="string">"print"</span>,new Class[]&#123;int.class,int.class&#125;);</span><br><span class="line">            //Method m = c.getMethod(<span class="string">"print"</span>,int.class,int.class);</span><br><span class="line">            Method m = c.getMethod(<span class="string">"print"</span>,String.class,String.class);</span><br><span class="line">            //object 是方法的返回值没有返回值为null</span><br><span class="line">            //m.invoke(a1,new Object[]&#123;10,20&#125;);</span><br><span class="line">            Object o = m.invoke(a1,<span class="string">"hello"</span>,<span class="string">"world"</span>);</span><br><span class="line">            // 当没有参数列表时</span><br><span class="line">            //Method m2 = c.getMethod(<span class="string">"print"</span>);</span><br><span class="line">            Method m2 = c.getMethod(<span class="string">"print"</span>,new Class[]&#123;&#125;);</span><br><span class="line">            m2.invoke(a1);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class A&#123;</span><br><span class="line">    public void <span class="function"><span class="title">print</span></span>()&#123;</span><br><span class="line">        System.out.println(<span class="string">"空"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    public void <span class="built_in">print</span>(int a,int b)&#123;</span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">    public void <span class="built_in">print</span>(String s1,String s2)&#123;</span><br><span class="line">        System.out.println(s1+s2);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="集合泛型的本质"><a href="#集合泛型的本质" class="headerlink" title="集合泛型的本质"></a>集合泛型的本质</h2><blockquote>
+<ul>
+<li>编译之后集合的泛型是去泛型化的</li>
+<li>Java中集合的泛型，是防止错误输入的，只在编译阶段有效，</li>
+<li>绕过编译就无效了</li>
+<li>验证：我们可以通过方法的反射来操作，绕过编译</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		ArrayList list = new ArrayList();</span><br><span class="line">		</span><br><span class="line">		ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();</span><br><span class="line">		list1.add(<span class="string">"hello"</span>);</span><br><span class="line">		//list1.add(20);错误的</span><br><span class="line">		Class c1 = list.getClass();</span><br><span class="line">		Class c2 = list1.getClass();</span><br><span class="line">		System.out.println(c1 == c2);</span><br><span class="line">		//反射的操作都是编译之后的操作</span><br><span class="line">		/*</span><br><span class="line">		 * c1==c2结果返回<span class="literal">true</span>说明编译之后集合的泛型是去泛型化的</span><br><span class="line">		 * Java中集合的泛型，是防止错误输入的，只在编译阶段有效，</span><br><span class="line">		 * 绕过编译就无效了</span><br><span class="line">		 * 验证：我们可以通过方法的反射来操作，绕过编译</span><br><span class="line">		 */</span><br><span class="line">		try &#123;</span><br><span class="line">			Method m = c2.getMethod(<span class="string">"add"</span>, Object.class);</span><br><span class="line">			m.invoke(list1, 20);//绕过编译操作就绕过了泛型</span><br><span class="line">			System.out.println(list1.size());</span><br><span class="line">			System.out.println(list1);</span><br><span class="line">			/*<span class="keyword">for</span> (String string : list1) &#123;</span><br><span class="line">				System.out.println(string);</span><br><span class="line">			&#125;*///现在不能这样遍历</span><br><span class="line">		&#125; catch (Exception e) &#123;</span><br><span class="line">		  e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/21/Java反射Class类与类动态载/">Java反射Class类与类动态载</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 待你如初见 的个人博客">待你如初见</a></p>
+        <p><span>发布时间:</span>2018年01月21日 - 21时28分</p>
+        <p><span>最后更新:</span>2018年01月22日 - 15时58分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/21/Java反射Class类与类动态载/" title="Java反射Class类与类动态载">http://win5.top/2018/01/21/Java反射Class类与类动态载/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://win5.top/2018/01/21/Java反射Class类与类动态载/　　作者: 待你如初见" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/01/23/JavaSocket应用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          JavaSocket应用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/20/对象序列化与反序列化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">对象序列化与反序列化</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class类，类类型的概念"><span class="toc-number">1.</span> <span class="toc-text">Class类，类类型的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何表示"><span class="toc-number">1.1.</span> <span class="toc-text">如何表示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class动态加载类的方法"><span class="toc-number">2.</span> <span class="toc-text">Class动态加载类的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的加载方式（2种）"><span class="toc-number">3.</span> <span class="toc-text">类的加载方式（2种）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、静态加载类"><span class="toc-number">3.1.</span> <span class="toc-text">1、静态加载类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、动态加载类"><span class="toc-number">3.2.</span> <span class="toc-text">2、动态加载类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取方法信息"><span class="toc-number">4.</span> <span class="toc-text">获取方法信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取方法信息："><span class="toc-number">4.1.</span> <span class="toc-text">获取方法信息：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method类提供了一些操作方法的方法"><span class="toc-number">4.2.</span> <span class="toc-text">Method类提供了一些操作方法的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员变量的类类型"><span class="toc-number">5.</span> <span class="toc-text">成员变量的类类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数的类类型"><span class="toc-number">6.</span> <span class="toc-text">构造函数的类类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法的反射"><span class="toc-number">7.</span> <span class="toc-text">方法的反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何获取某个方法与方法的反射"><span class="toc-number">7.1.</span> <span class="toc-text">如何获取某个方法与方法的反射</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合泛型的本质"><span class="toc-number">8.</span> <span class="toc-text">集合泛型的本质</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/01/23/JavaSocket应用/" title="上一篇: JavaSocket应用">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/01/20/对象序列化与反序列化/" title="下一篇: 对象序列化与反序列化">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/Java中间件/">Java中间件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/自学相关资源/">自学相关资源</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Spring基础篇/">Spring基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/Java多线程/">Java多线程 </a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/23/JavaSocket应用/">JavaSocket应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/21/Java反射Class类与类动态载/">Java反射Class类与类动态载</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/20/对象序列化与反序列化/">对象序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/JavaIO流输入输出流-字符流/">JavaIO流输入输出流-字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流输入输出流-字节流/">JavaIO流输入输出流-字节流</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/18/JavaIO流RandomAccessFile/">JavaIO流RandomAccessFile</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/JavaIO流File类/">JavaIO流File类</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 待你如初见
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
